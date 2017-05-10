@@ -370,8 +370,16 @@ for i = 1:length(sampleIDs)
     spclib_relab(i).wavelength_strt = wavelength_strts(i);
     spclib_relab(i).wavelength_end = wavelength_ends(i);
     spclib_relab(i).resolution = resolutions{i};
-    spclib_relab(i).incident = incidents{i};
-    spclib_relab(i).emission = emissions{i}; 
+    if isnumeric(incidents{i})
+        spclib_relab(i).incident = incidents{i};
+    else
+        spclib_relab(i).incident = NaN;
+    end
+    if isnumeric(emissions{i})
+        spclib_relab(i).emission = emissions{i};
+    else
+        spclib_relab(i).emission = NaN;
+    end
     
     
     % sample catalogue properties
@@ -382,8 +390,17 @@ for i = 1:length(sampleIDs)
     spclib_relab(i).type1 = type1s{i};
     spclib_relab(i).type2 = type2s{i};
     spclib_relab(i).subType = subTypes{i};
-    spclib_relab(i).minSize = minSizes{i};
-    spclib_relab(i).maxSize = maxSizes{i};
+    if minSizes{i}>0
+        spclib_relab(i).minSize = minSizes{i};
+    else
+        spclib_relab(i).minSize = NaN;
+    end
+    if maxSizes{i}>0
+        spclib_relab(i).maxSize = maxSizes{i};
+    else
+        spclib_relab(i).maxSize = NaN;
+    end
+    
     spclib_relab(i).particulate = particulates{i};
     spclib_relab(i).texture = textures{i};
     
